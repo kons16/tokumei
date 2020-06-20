@@ -1,8 +1,7 @@
+import os
 import json
 import urllib3
-from urllib.parse import urlparse
-import urllib.parse
-import os
+from urllib.parse import urlparse, unquote
 import logging
 import requests
 
@@ -23,8 +22,8 @@ def lambda_handler(event, context):
     msg = text[0].split("=")[1]
     a_token = token[0].split("=")[1]
 
-    msg = urllib.parse.unquote(msg)
-    token = urllib.parse.unquote(a_token)
+    msg = unquote(msg)
+    token = unquote(a_token)
 
     if token == os.environ['access_token']:
         url = "https://slack.com/api/chat.postMessage"
